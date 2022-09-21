@@ -24,7 +24,7 @@
 })(typeof window !== "undefined" ? window : this, function(window, noGlobal) {
     "use strict";
 
-    let GJS_VERSION = Symbol.for('1.0');
+    const GJS_VERSION = Symbol.for('1.0');
     let Three3DModel = false;
     let requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
     window.requestAnimationFrame = requestAnimationFrame;
