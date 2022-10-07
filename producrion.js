@@ -844,6 +844,7 @@
                     window.Level = Level;
                 }
 
+               /* Creating a new instance of the Game class. */
                return new Game();
             }
 
