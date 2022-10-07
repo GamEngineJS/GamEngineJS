@@ -34,6 +34,7 @@
     const GJS_NATIVE_VERSION = Symbol.for('1.0');
     const GJS_GUI_VERSION = Symbol.for('1.0');
     const GJS_HANDLERS_VERSION = Symbol.for('1.0');
+    const GJS_TOUCH_VERSION = Symbol.for('1.0');
 
     let Three3DModel = false;
     let requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
@@ -873,6 +874,7 @@
         window.GJS_NATIVE_VERSION = GJS_NATIVE_VERSION;
         window.GJS_GUI_VERSION = GJS_GUI_VERSION;
         window.GJS_HANDLERS_VERSION = GJS_HANDLERS_VERSION;
+        window.GJS_TOUCH_VERSION = GJS_TOUCH_VERSION;
     }
 
     return GameJS;
