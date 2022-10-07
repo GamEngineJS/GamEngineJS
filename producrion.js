@@ -6,6 +6,11 @@
  (function (global, factory) {
     "use strict";
 
+   /* Checking if the module is an object and if the module.exports is an object. If it is, then it is
+   checking if the global.document is true. If it is, then it is returning the factory(global,
+   true). If it is not, then it is returning a function that checks if the document is not true. If
+   it is not, then it is throwing an error. If it is, then it is returning the factory(a). If it is
+   not, then it is returning the factory(global). */
     // CommonJS
     if (typeof module === "object" && typeof module.exports === "object") {
         module.exports = global.document ? factory(global, true):
@@ -24,7 +29,12 @@
 })(typeof window !== "undefined" ? window : this, function(window, noGlobal) {
     "use strict";
 
+    /* A version check. */
     const GJS_VERSION = Symbol.for('1.0');
+    const GJS_NATIVE_VERSION = Symbol.for('1.0');
+    const GJS_GUI_VERSION = Symbol.for('1.0');
+    const GJS_HANDLERS_VERSION = Symbol.for('1.0');
+
     let Three3DModel = false;
     let requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
     window.requestAnimationFrame = requestAnimationFrame;
@@ -36,15 +46,17 @@
     const fileRE = /(?:[a-zA-Z]:\\|\/).*?:\d+:\d+/g;
     const codeframeRE = /^(?:>?\s+\d+\s+\|.*|\s+\|\s*\^.*)\r?\n/gm;
 
-    // Server... //
+    /* Trying to connect to a websocket server. */
     try {
+        /* Creating a new WebSocket connection to the server. */
         const socket = new WebSocket(`${socketProtocol}://${socketHost}`, 'GamEngineJS-hmr');
 
-        // Listen status...
+        /* Listening for a message from the server. */
         socket.addEventListener('message', async ({ data }) => {
             handleMessage(JSON.parse(data));
         });
 
+        /* Polling for a restart. */
         socket.addEventListener('close', async ({ ev }) => {
             if (ev) return;
             console.log('[GamEngineJS] server connection lost. polling for restart...');
@@ -65,12 +77,13 @@
                 default: return payload;
             }
         }
+        
     } catch {}
-
     // End Server... //
     
     function GameJS() {};
 
+    /* Creating a namespace. */
     const namespaces = (function(){
             const namespace = new class namespace { 
                 constructor(){
@@ -97,6 +110,10 @@
     })();
 
 
+    /**
+     * It creates a div element and then creates a pre element and then creates a span element and then
+     * creates a pre element and then creates a pre element and then creates a div element.
+     */
     function createTemplatePage({ message, stack, err }) {
         let boxMonitor = document.createElement('div');
         let Message = document.createElement('pre');
@@ -227,6 +244,11 @@
         document.body.appendChild(boxMonitor);
     };
 
+    /**
+     * It's a function that returns a class that has a static method that returns a promise that resolves
+     * to a string that is used to set the background color of the body element
+     * @returns The class is being returned.
+     */
     function pageError() {
         return class {
             constructor(){
@@ -253,6 +275,12 @@
             this.canvas, this.ctx;
         }
 
+        /**
+         * The function creates a canvas element and appends it to the body.
+         * @param props - {
+         * @param callback - function
+         * @returns The return value is an array containing the context and the properties.
+         */
         createHolst(props, callback){
             try {
                 if(typeof props !== 'object' || Array.isArray(props)){
@@ -304,6 +332,10 @@
             return [this.ctx, props];
         }
 
+        /**
+         * It creates a text element on the canvas.
+         * @param props - An object containing the following properties:
+         */
         createText(props) {
             this.ctx.beginPath();
             this.ctx.fillStyle = props.fillStyle || 'black';
@@ -313,6 +345,13 @@
             this.ctx.closePath();
         }
 
+        /**
+         * It's a function that creates a sprite and animates it.
+         * </code>
+         * @param props
+         * @param callback - function(sprite, postion, currentPostion)
+         * @returns The return value is the object that is being returned.
+         */
         AnimationSprite(props, callback){
             let image = new Image();
             image.src = props.src;
@@ -392,6 +431,12 @@
             return this.Options;
         }
 
+        /**
+         * It loads a sprite onto the canvas
+         * @param props - An array of objects that contain the following properties:
+         * @param callback - function
+         * @returns The return value is an array containing the context and the properties.
+         */
         loadSprite(props, callback){
             if(callback) callback(props);
             let ctx = this.ctx;
@@ -418,12 +463,17 @@
             }
 
             draw();
-
             return [this.ctx, props];
         }
 
     }
 
+    /**
+     * LoadSound(src) returns a function that plays the sound at src with the volume specified in the
+     * options object.
+     * @param src - The source of the sound file.
+     * @returns A function that takes an object as an argument.
+     */
     function loadSound(src) {
         let music = new Audio(src);
         music.autoplay = true;
@@ -431,6 +481,12 @@
         return (options) => { if(options.volume) music.volume = options.volume; }
     }
 
+    /**
+     * The function speechText() takes a string as an argument and returns a function that takes a
+     * language code as an argument.
+     * @param [text] - The text to be spoken.
+     * @returns A function that takes a language as an argument.
+     */
     function speechText(text = '') {
         const speech = new SpeechSynthesisUtterance(text);
         typeof text == 'string' ? speechSynthesis.speak(speech) : false;
@@ -438,6 +494,7 @@
         return (lang) => speech.lang = lang;
     }
 
+    /** It's a class that creates a level for a game. </code> */
     class Level extends Game {
         roomLevels = [];
 
@@ -445,9 +502,6 @@
           super();
         }
 
-        /**
-         * @param {object} props 
-         */
         create(props, callback){
             let canvas = this.canvas;
             let ctx = this.ctx;
@@ -534,9 +588,9 @@
 
             if(callback) callback(level, states);
         }
-
     }
 
+    /** It creates a sprite sheet animation. */
     class Player extends Game {
         options = [];
 
@@ -544,7 +598,7 @@
             super();
         }
 
-        create(props) {
+        create(props){
             let image = new Image();
             image.src = props.src;
             let options = this.options;
@@ -594,10 +648,143 @@
         }
     }
 
+    /** Native is a class that extends Object and has no properties or methods. */
+    class Native { }
+
+    /** If the user is on a mobile device, return the name of the device, otherwise return 'Computer'. */
+    class Android extends Native { 
+        constructor(){
+            this.smartOS;
+
+            const toSmart = [
+                /Android/i,
+                /webOS/i,
+                /iPhone/i,
+                /iPad/i,
+                /iPod/i,
+                /BlackBerry/i,
+                /Windows Phone/i
+            ];
+            if(navigator.userAgentData.mobile){  
+                return toSmart.some((item) => {
+                    return navigator.userAgent.match(item);
+                });
+            } else {
+                return 'Computer';
+            }
+        }
+    }
+
+    /** Browser is a class that extends Window and returns the browser name and OS name. */
+    class Browser extends Window {
+        constructor(){
+            /* Creating a new object called "browser" and then creating a new property called "userAgent" and
+            assigning it the value of the userAgent property of the navigator object. */
+            this.userAgent = this.navigator.userAgent.toLowerCase();
+            this.browserName;
+            this.OSName;
+
+            /* Checking the user agent string to determine the browser name. */
+            switch (true) {
+                case agent.indexOf("edge") > -1: this.browserName = "MS Edge";
+                case agent.indexOf("edg/") > -1: this.browserName = "Edge ( chromium based)";
+                case agent.indexOf("opr") > -1 && !!window.opr: this.browserName = "Opera";
+                case agent.indexOf("chrome") > -1 && !!window.chrome: this.browserName = "Chrome";
+                case agent.indexOf("trident") > -1: this.browserName = "MS IE";
+                case agent.indexOf("firefox") > -1: this.browserName = "Mozilla Firefox";
+                case agent.indexOf("safari") > -1: this.browserName = "Safari";
+                default: this.browserName = "other";
+            }
+
+            /* Checking the user agent string to see what operating system the user is using. */
+            switch (true) {
+                case agent.indexOf("Windows NT 10.0") != -1:  this.OSName = "Windows 10";
+                case agent.indexOf("Windows NT 6.3") != -1:  this.OSName = "Windows 8.1";
+                case agent.indexOf("Windows NT 6.2") != -1:  this.OSName = "Windows 8";
+                case agent.indexOf("Windows NT 6.1") != -1:  this.OSName = "Windows 7";
+                case agent.indexOf("Windows NT 6.0") != -1:  this.OSName = "Windows Vista";
+                case agent.indexOf("Windows NT 5.1") != -1:  this.OSName = "Windows XP";
+                case agent.indexOf("Windows NT 5.0") != -1:  this.OSName = "Windows 2000";
+                case agent.indexOf("Mac")            != -1:  this.OSName = "Mac/iOS";
+                case agent.indexOf("X11")            != -1:  this.OSName = "UNIX";
+                case agent.indexOf("Linux")          != -1:  this.OSName = "Linux";
+                default: this.OSName = "other";
+            }
+
+            /* Returning an array with the browser name and the OS name. */
+            return [this.browserName, this.OSName];
+        }
+    }
+
+
+    /** &gt; The GUI class is a class that is used to create a GUI.
+    
+    Here's a more detailed explanation of the above class:
+
+    &gt; The GUI class is a class that is used to create a GUI. It has a constructor that takes two
+    arguments: controls and args. The controls argument is a list of controls that are used to create
+    the GUI. The args argument is a list of arguments that are used to create the GUI.
+
+    Here's a one sentence summary of the above class: 
+
+    &gt; The GUI class is a class that is used to create a GUI.
+
+    Here's a more detailed explanation of the above class:
+
+    &gt; The GUI class is a class that is used to create a GUI. It has a constructor that takes two
+    arguments: controls and args. The controls argument is a list of controls that are used */
+    class GUI extends Native {
+        constructor(controls, ...args){
+            this.controls = this.controls;
+            this.args = args;
+        }
+    }
+
+    /** The class is a subclass of the GUI class, and it contains two methods, Button and ProgressBar. 
+    
+    The Button method takes two arguments, props and options. The props argument is an object that
+    contains the properties of the button. The options argument is an array that contains the
+    options of the button. 
+    
+    The ProgressBar method takes two arguments, props and options. The props argument is an object
+    that contains the properties of the progress bar. The options argument is an array that contains
+    the options of the progress bar. 
+    
+    The COMMON_STYLESHEET property is an object that contains the common stylesheet of the button
+    and progress bar. 
+    
+    The Button method returns an object that contains the properties and options of the button. 
+    
+    The ProgressBar method returns an object that contains the properties and options of the
+    progress bar. 
+    
+    The COMMON */
+    class Controls extends GUI {
+        COMMON_STYLESHEET = Object.assign({
+            background: 'grey',
+            borderRadius: '10px',
+            opacity: '10%'
+        });
+
+        Button(props, ...options) {
+            this.props = props;
+            this.options = options;
+        }
+
+        propgressBar(props, ...options) {
+            this.props = props;
+            this.options = options;
+        }
+    }
+
+    /* Adding a property to the prototype of the Game, Level, and Player objects. */
     Game.prototype.type = 'game';
     Level.prototype.type = 'level';
     Player.prototype.type = 'player';
+    /* Creating a new object called Native and adding a new property called native to it. */
+    Native.prototype.native = 'native';
 
+    /* Creating a new object called namespaces and then adding a property to it called namespaces. */
     Object.defineProperties(namespaces, {
         namespaces: {
             enumerable: false,
@@ -611,6 +798,7 @@
         }
     });
 
+    /* Defining a getter for the property ctx. */
     Object.defineProperty(Game.prototype, 'getContext' , {
         get: function () {
             if (typeof this.ctx === 'undefined')
@@ -620,18 +808,28 @@
         }
     });
 
+    /* Creating a getter for the postion property. */
     Object.defineProperty(Player.prototype, 'getPostion', {
         get: function () {
             return this.postion;
         }
     });
 
+    /* Freezing the objects so that they cannot be changed. */
     Object.freeze(namespaces);
     Object.freeze(Player);
     Object.freeze(Level);
+    Object.freeze(Native);
+    Object.freeze(GUI);
+    Object.freeze(Android);
+    Object.freeze(Controls);
+    Object.freeze(Browser);
 
     /**
-     * @param {string} module 
+     * A switch statement that is checking the value of the variable "type" and then executing the code
+     * in the case that matches the value of "type".
+     * @param module - The module that is being required.
+     * @returns The Game() function is being returned.
      */
     function require(module) {
         switch (module) {
@@ -648,6 +846,18 @@
                return new Game();
             }
 
+            /* A switch statement that is checking the value of the variable "type" and then executing
+            the code in the case that matches the value of "type". */
+            case 'native' : {
+                if (!noGlobal) {
+                 window.Native = Native;
+                 window.GUI = GUI;
+                 window.Controls = Controls;
+                 window.Browser = Browser;
+                 window.Android = Android;
+                }
+            }
+
             case '3D'.toLocaleLowerCase() : {
                 Three3DModel = true; //? Three3DModelGlobal() : false;
             }
@@ -655,10 +865,14 @@
         }
     }
 
+    /* Creating a global variable called GameJS. */
     if(!noGlobal){
         window.GameJS = window.gjs = GameJS;
         window.require = require;
         window.GJS_VERSION = GJS_VERSION;
+        window.GJS_NATIVE_VERSION = GJS_NATIVE_VERSION;
+        window.GJS_GUI_VERSION = GJS_GUI_VERSION;
+        window.GJS_HANDLERS_VERSION = GJS_HANDLERS_VERSION;
     }
 
     return GameJS;
