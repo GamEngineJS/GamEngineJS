@@ -1,0 +1,19 @@
+{
+  "name": "GameEngineJS-Docs",
+  "version": "0.0.1",
+  "description": "GameEngineJS Documentation",
+  "main": "index.js",
+  "authors": {
+    "name": "E5war5IT",
+    "email": "eduard.17072006@gmail.com"
+  },
+  "repository": "GameEngineJS/GameEngineJS-Docs",
+  "scripts": {
+    "dev": "vuepress dev src",
+    "build": "vuepress build src"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "vuepress": "^1.5.3"
+  }
+}
