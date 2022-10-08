@@ -35,6 +35,8 @@
     const GJS_GUI_VERSION = Symbol.for('1.0');
     const GJS_HANDLERS_VERSION = Symbol.for('1.0');
     const GJS_TOUCH_VERSION = Symbol.for('1.0');
+    const GJS_BROWSER_VERSION = Symbol.for('1.0');
+    const GJS_ANDROID_VERSION = Symbol.for('1.0');
 
     let Three3DModel = false;
     let requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
@@ -736,7 +738,8 @@
     arguments: controls and args. The controls argument is a list of controls that are used */
     class GUI extends Native {
         constructor(controls, ...args){
-            this.controls = this.controls;
+            super();
+            this.controls = controls;
             this.args = args;
         }
     }
@@ -761,20 +764,66 @@
     
     The COMMON */
     class Controls extends GUI {
-        COMMON_STYLESHEET = Object.assign({
+        _COMMON_STYLESHEET_ = Object.assign({
             background: 'grey',
             borderRadius: '10px',
-            opacity: '10%'
+            opacity: '10%',
+            borderRadius: '10px'
         });
 
-        Button(props, ...options) {
+        _MODIFICATE_STYLESHEET_ = { }; /** v(2.0) */
+
+        Button(props,  callback) {
             this.props = props;
-            this.options = options;
+            let text = props?.text || 'button';
+            let button = document.createElement('button');
+            button.setAttribute('class', 'gjs-button');
+            button.innerText = text;
+
+            callback && callback();
+
+            let ObjectButton = Object;
+            const styleSheetButton = ObjectButton.assign(this._COMMON_STYLESHEET_);
+            this._pack(styleSheetButton, button);
         }
 
-        propgressBar(props, ...options) {
+        progressBar(props, callback) {
             this.props = props;
-            this.options = options;
+            let value = props.value || 0;
+            let progressBar = document.createElement('progress');
+            progressBar.setAttribute('class', 'gjs-progressBar');
+            progressBar.setAttribute('max', '100');
+            progressBar.setAttribute('value', value);
+
+            let event = document.addEventListener("DOMContentLoaded", function(event) {             
+                document.querySelector('.gjs-button').addEventListener("click", function(event){
+                    document.querySelector('.gjs-progressBar').value += value;
+                });
+
+                return event;
+            });
+
+            callback && callback(event);
+
+            let ObjectProgressBar = Object;
+            const styleSheetProgressBar = ObjectProgressBar.assign(this._COMMON_STYLESHEET_);
+            this._pack(styleSheetProgressBar, progressBar);
+        }
+
+
+        /**
+         * It takes a style sheet and a component, and then applies the style sheet to the component
+         * @param [styleSheet] - The stylesheet object that you want to apply to the component.
+         * @param [component] - The component you want to style.
+         */
+        _pack(styleSheet = {}, component = HTMLElement){
+            const Component = Object;
+
+            for(let i = 0; i < Component.keys(styleSheet).length; i++){
+                component.style[Component.keys(styleSheet)[i]] = Component.values(styleSheet)[i];
+            }
+
+            document.body.appendChild(component);
         }
     }
 
@@ -816,15 +865,14 @@
         }
     });
 
-    /* Freezing the objects so that they cannot be changed. */
+    /* Freezing the components. */
+    const component = Object;
+    const freezeComponents = [Player, Level, Native, GUI, Android, Controls, Browser];
     Object.freeze(namespaces);
-    Object.freeze(Player);
-    Object.freeze(Level);
-    Object.freeze(Native);
-    Object.freeze(GUI);
-    Object.freeze(Android);
-    Object.freeze(Controls);
-    Object.freeze(Browser);
+
+    for (let idx = 0; idx < freezeComponents.length; idx++) {
+        component['freeze'](freezeComponents[idx]);
+    }
 
     /**
      * A switch statement that is checking the value of the variable "type" and then executing the code
@@ -876,6 +924,8 @@
         window.GJS_GUI_VERSION = GJS_GUI_VERSION;
         window.GJS_HANDLERS_VERSION = GJS_HANDLERS_VERSION;
         window.GJS_TOUCH_VERSION = GJS_TOUCH_VERSION;
+        window.GJS_BROWSER_VERSION = GJS_BROWSER_VERSION;
+        window.GJS_ANDROID_VERSION = GJS_ANDROID_VERSION;
     }
 
     return GameJS;
