@@ -60,4 +60,6 @@ declare namespace namespaces {
      class Store extends useState {}
 };
 
+declare interface GUI {}
+
 declare function require(params: string) : Function;

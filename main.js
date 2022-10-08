@@ -1,6 +1,16 @@
 require('game');
+require('native');
 
 let game = new Game();
+let native = new Native();
+let gui = new GUI();
+let contrs = new Controls();
+
+contrs.Button();
+
+contrs.progressBar({
+    text: 'create'
+});
 
 game.createHolst({
     width: 1000,
