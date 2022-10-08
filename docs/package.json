@@ -1,5 +1,5 @@
 {
-  "name": "GameEngineJS-Docs",
+  "name": "gamengine-js-docs",
   "version": "0.0.1",
   "description": "GameEngineJS Documentation",
   "main": "index.js",
@@ -7,7 +7,7 @@
     "name": "E5war5IT",
     "email": "eduard.17072006@gmail.com"
   },
-  "repository": "GameEngineJS/GameEngineJS-Docs",
+  "repository": "https://github.com/GamEngineJS/GamEngineJS/tree/gh-pages",
   "scripts": {
     "dev": "vuepress dev src",
     "build": "vuepress build src"
