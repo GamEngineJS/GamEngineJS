@@ -4,7 +4,7 @@ module.exports = {
   /**
    * Ref：https://v1.vuepress.vuejs.org/config/#title
    */
-  title: 'Docs Boilerplate',
+  title: 'gamEngineJS Docs',
   /**
    * Ref：https://v1.vuepress.vuejs.org/config/#description
    */
