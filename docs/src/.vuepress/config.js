@@ -12,7 +12,6 @@ module.exports = {
 
   /**
    * Extra tags to be injected to the page HTML `<head>`
-   *
    * ref：https://v1.vuepress.vuejs.org/config/#head
    */
   head: [
@@ -23,7 +22,6 @@ module.exports = {
 
   /**
    * Theme configuration, here is the default theme configuration for VuePress.
-   *
    * ref：https://v1.vuepress.vuejs.org/theme/default-theme-config.html
    */
   themeConfig: {
@@ -42,8 +40,8 @@ module.exports = {
         link: '/config/'
       },
       {
-        text: 'VuePress',
-        link: 'https://v1.vuepress.vuejs.org'
+        text: 'profile',
+        link: '/pages/profile/'
       }
     ],
     sidebar: {
