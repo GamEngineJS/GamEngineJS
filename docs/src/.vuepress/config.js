@@ -37,11 +37,11 @@ module.exports = {
       },
       {
         text: 'Config',
-        link: '/config/'
+        link: '/config/',
       },
       {
-        text: 'profile',
-        link: '/pages/profile/'
+        text: 'Profile',
+        link: './src/profile/',
       }
     ],
     sidebar: {

@@ -1,5 +1,5 @@
 {
-  "name": "gamengine-js-docs",
+  "name": "game-engine-js-docs",
   "version": "1.0.0",
   "description": "GameEngineJS Documentation",
   "main": "index.js",
@@ -7,13 +7,24 @@
     "name": "E5war5IT",
     "email": "eduard.17072006@gmail.com"
   },
-  "repository": "https://github.com/GamEngineJS/GamEngineJS/tree/gh-pages",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GamEngineJS/GamEngineJS.git#gh-pages"
+  },
   "scripts": {
     "dev": "vuepress dev src",
     "build": "vuepress build src"
   },
   "license": "MIT",
   "devDependencies": {
-    "vuepress": "^1.5.3"
-  }
+    "vuepress": "^1.9.7"
+  },
+  "bugs": {
+    "url": "https://github.com/GamEngineJS/GamEngineJS/issues"
+  },
+  "homepage": "https://github.com/GamEngineJS/GamEngineJS/tree/gh-pages#readme",
+  "keywords": [
+    "docs"
+  ],
+  "author": "E5war5IT"
 }
