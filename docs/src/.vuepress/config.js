@@ -41,7 +41,7 @@ module.exports = {
       },
       {
         text: 'Profile',
-        link: './src/profile/',
+        link: '/profile/',
       }
     ],
     sidebar: {
@@ -52,6 +52,16 @@ module.exports = {
           children: [
             '',
             'using-vue',
+          ]
+        }
+      ],
+      '/profile/': [
+        {
+          title: 'Profile',
+          collapsable: false,
+          children: [
+            '',
+            'info',
           ]
         }
       ],
