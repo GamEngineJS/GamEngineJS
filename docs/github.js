@@ -1,3 +1,8 @@
+const GITHUB_NAME_ACCOUNT;
+const GITHUB_AVATAR_URL;
+const GITHUB_BIO;
+const GITHUB_COUNT_FOLLOWERS;
+
 /* Fetching the data from the API and storing it in the variables. */
 let profile = fetch('https://api.github.com/users/E5war5IT', {
     mode: 'no-cors'
@@ -17,5 +22,6 @@ profile.then(response => {
     let name = data.name;
     let bio = data.bio;
     let followers = data.followers;
-
+    
+    GITHUB_NAME_ACCOUNT = name;
 });
