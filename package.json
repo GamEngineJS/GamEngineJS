@@ -1,0 +1,23 @@
+{
+  "name": "gamenginejs",
+  "version": "1.0.0",
+  "description": "🏗️ - Make architectural changes; \r GUI Interface (v1.0)\r ![GUI](GUI.svg)",
+  "main": "production.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GamEngineJS/GamEngineJS.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GamEngineJS/GamEngineJS/issues"
+  },
+  "homepage": "https://github.com/GamEngineJS/GamEngineJS#readme"
+}
