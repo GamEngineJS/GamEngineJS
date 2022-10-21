@@ -947,6 +947,8 @@
             GJS_TOUCH_VERSION: GJS_TOUCH_VERSION,
         }
     } catch (error) {
+        /* Creating a new ReferenceError object with the message "error" and the cause of the error
+        being the error object. */
         new ReferenceError(error, { cause: error });
     }
 
