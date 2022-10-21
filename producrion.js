@@ -1,6 +1,6 @@
 /**
  * GamEngineJS JavaScript v 0.1.0
- * @see https://github.com/GamEngineJS
+ * @see https://github.com/GamEngineJS/GamEngineJS/tree/main
  * Date: 2022
  */
  (function (global, factory) {

@@ -26,5 +26,8 @@
   "keywords": [
     "docs"
   ],
-  "author": "E5war5IT"
+  "author": "E5war5IT",
+  "dependencies": {
+    "@vuepress/utils": "^2.0.0-alpha.1"
+  }
 }

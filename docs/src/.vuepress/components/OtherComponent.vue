@@ -1,3 +1,3 @@
 <template>
-  <p class="demo">This is another component</p>
+  <p class="demo">GitHub profile author.</p>
 </template>
