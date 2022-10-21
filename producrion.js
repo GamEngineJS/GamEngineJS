@@ -1,6 +1,6 @@
 /**
  * GamEngineJS JavaScript v 0.1.0
- * @see https://github.com/GamEngineJS
+ * @see https://github.com/GamEngineJSnpm 
  * Date: 2022
  */
  (function (global, factory) {
@@ -84,6 +84,9 @@
     } catch {}
     // End Server... //
     
+    /**
+     * It creates a new object called GameJS, which is an empty object
+     */
     function GameJS() {};
 
     /* Creating a namespace. */
@@ -917,6 +920,7 @@
 
     /* Creating a global variable called GameJS. */
     if(!noGlobal){
+        /* Creating a global variable called GameJS and assigning it to the GameJS object. */
         window.GameJS = window.gjs = GameJS;
         window.require = require;
         window.GJS_VERSION = GJS_VERSION;
@@ -926,6 +930,24 @@
         window.GJS_TOUCH_VERSION = GJS_TOUCH_VERSION;
         window.GJS_BROWSER_VERSION = GJS_BROWSER_VERSION;
         window.GJS_ANDROID_VERSION = GJS_ANDROID_VERSION;
+    }
+    
+    /* The above code is exporting the GameJS object to the module.exports object. */
+    try {
+        /* Exporting the GameJS object to the module.exports object. */
+        module.exports = {
+            GameJS: GameJS,
+            connect: require,
+            GJS_VERSION: GJS_VERSION,
+            GJS_NATIVE_VERSION: GJS_NATIVE_VERSION,
+            GJS_ANDROID_VERSION: GJS_ANDROID_VERSION,
+            GJS_BROWSER_VERSION: GJS_BROWSER_VERSION,
+            GJS_HANDLERS_VERSION: GJS_HANDLERS_VERSION,
+            GJS_GUI_VERSION: GJS_GUI_VERSION,
+            GJS_TOUCH_VERSION: GJS_TOUCH_VERSION,
+        }
+    } catch (error) {
+        new ReferenceError(error, { cause: error });
     }
 
     return GameJS;
