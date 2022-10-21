@@ -931,7 +931,7 @@
         window.GJS_BROWSER_VERSION = GJS_BROWSER_VERSION;
         window.GJS_ANDROID_VERSION = GJS_ANDROID_VERSION;
     }
-    
+
     /* The above code is exporting the GameJS object to the module.exports object. */
     try {
         /* Exporting the GameJS object to the module.exports object. */
