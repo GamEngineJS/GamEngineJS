@@ -32,6 +32,7 @@ module.exports = {
     docsDir: '',
     editLinkText: '',
     lastUpdated: false,
+    sidebarDepth: 2,
     nav: [
       {
         text: 'Guide',
@@ -45,8 +46,8 @@ module.exports = {
         text: 'versions',
         arialLabel: 'versions standarts',
         items: [
-          { text: 'v1.0', link: '@pages/v1/' },
-          { text: 'v2.0', link: '@pages/v2/' },
+          { text: 'v1.0', link: '/pages/v1/' },
+          { text: 'v2.0', link: '/pages/v2/' },
         ]
       },
       {
@@ -63,6 +64,7 @@ module.exports = {
             '',
             'start',
             'constants',
+            'startJS',
           ]
         }
       ],
@@ -76,17 +78,27 @@ module.exports = {
           ]
         }
       ],
-      '@pages/v1/': [
+      '/pages/': [
         {
-          title: 'specification Vx',
+          title: 'v1',
           collapsable: false,
           children: [
-            '',
-            '',
-            'start',
+            'v1/',
+            'v1/start',
           ]
-        }
+        },
+        {
+          title: 'v2',
+          collapsable: false,
+          children: [
+            'v2/',
+            'v2/start',
+          ]
+        },
       ],
+      '/': [
+        '',
+      ] 
     }
   },
 

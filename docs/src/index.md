@@ -1,7 +1,7 @@
 ---
 lang: en-US
 home: true
-heroImage: GamEngineJS-1/docs/images/logo.png
+heroImage: images/logo.png
 tagline: GameEngineJS Documentation
 actionText: Quick Start →
 actionLink: /guide/

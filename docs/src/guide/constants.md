@@ -1,9 +1,4 @@
----
-sidebar: auto
----
-
 # Constants
-
 
 <Constatns-Gjs/>
 
