@@ -1,6 +1,6 @@
 /**
  * GamEngineJS JavaScript v 0.1.0
- * @see https://github.com/GamEngineJSnpm 
+ * @see https://github.com/GamEngineJS
  * Date: 2022
  */
  (function (global, factory) {
@@ -883,7 +883,9 @@
      * @param module - The module that is being required.
      * @returns The Game() function is being returned.
      */
-    function require(module) {
+    function connect(module) {
+        console.log('success');
+
         switch (module) {
             case 'game': {
                 window.loadSound = loadSound;
@@ -922,7 +924,7 @@
     if(!noGlobal){
         /* Creating a global variable called GameJS and assigning it to the GameJS object. */
         window.GameJS = window.gjs = GameJS;
-        window.require = require;
+        window.connect = connect;
         window.GJS_VERSION = GJS_VERSION;
         window.GJS_NATIVE_VERSION = GJS_NATIVE_VERSION;
         window.GJS_GUI_VERSION = GJS_GUI_VERSION;
@@ -936,8 +938,8 @@
     try {
         /* Exporting the GameJS object to the module.exports object. */
         module.exports = {
-            GameJS: GameJS,
-            connect: require,
+            connect,
+            GameJS,
             GJS_VERSION: GJS_VERSION,
             GJS_NATIVE_VERSION: GJS_NATIVE_VERSION,
             GJS_ANDROID_VERSION: GJS_ANDROID_VERSION,
