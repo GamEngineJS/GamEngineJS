@@ -1,6 +1,8 @@
 /**
  * GamEngineJS JavaScript v 0.1.0
- * @see https://github.com/GamEngineJS
+ * @see GitHub https://github.com/GamEngineJS
+ * @see npm https://www.npmjs.com/package/gamenginejs
+ * @license ISC
  * Date: 2022
  */
  (function (global, factory) {

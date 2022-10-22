@@ -13,9 +13,17 @@ npm i gamenginejs
 ```
 
 ```js
-var gamenginejs = require("gamenginejs")
+let gamenginejs = require("gamenginejs")
+```
+If you want to update all global packages.
+```sh
+npm update -g
 ```
 
+If you want to update specific global package.
+```
+npm update -g gamenginejs
+```
 # links
 
 [npm](https://www.npmjs.com/package/gamenginejs)
