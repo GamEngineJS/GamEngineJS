@@ -24,6 +24,10 @@ If you want to update specific global package.
 ```
 npm update -g gamenginejs
 ```
+Go to the github repository.тзь
+```sh
+npm repo
+```
 # links
 
 [npm](https://www.npmjs.com/package/gamenginejs)
